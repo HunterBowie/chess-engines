@@ -1,4 +1,4 @@
-module app
+module github.com/HunterBowie/go-chess
 
 go 1.23.4
 

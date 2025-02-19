@@ -1,7 +1,7 @@
 package main
 
 import (
-	"app/internal/draw"
+	"github.com/HunterBowie/go-chess/internal/draw"
 	"github.com/veandco/go-sdl2/sdl"
 )
 
@@ -16,12 +16,11 @@ func main() {
 	running := true
 	for running {
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
-			switch event.(type) {
+			switch event := event.(type) {
 			case *sdl.QuitEvent:
 				running = false
 			case *sdl.KeyboardEvent:
-				keyEvent, _ := event.(*sdl.KeyboardEvent)
-				key := keyEvent.Keysym.Sym
+				key := event.Keysym.Sym
 				if key == sdl.K_UP {
 					rect.Y -= 10
 				}
