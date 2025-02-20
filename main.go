@@ -1,11 +1,14 @@
 package main
 
 import (
-	"github.com/HunterBowie/go-chess/internal/draw"
 	"github.com/veandco/go-sdl2/sdl"
+	"chess-engines/internal/draw"
+	"chess-engines/internal/engines/minimax"
 )
 
 func main() {
+
+	minimax.MyFunc()
 
 	window := draw.Init("Chess", 600, 600)
 

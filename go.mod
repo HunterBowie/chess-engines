@@ -1,4 +1,4 @@
-module github.com/HunterBowie/go-chess
+module chess-engines
 
 go 1.23.4
 
