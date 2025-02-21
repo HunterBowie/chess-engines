@@ -1,18 +1,20 @@
 package main
 
 import (
-	"github.com/veandco/go-sdl2/sdl"
+	"chess-engines/internal/chess"
 	"chess-engines/internal/draw"
-	"chess-engines/internal/engines/minimax"
+
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 func main() {
 
-	minimax.MyFunc()
-
-	window := draw.Init("Chess", 600, 600)
-
+	window := draw.Init()
 	defer draw.Quit(window)
+
+	assets := draw.LoadAssets(window)
+
+	board := chess.CreateBoard()
 
 	rect := sdl.Rect{X: 0, Y: 0, W: 200, H: 200}
 
@@ -30,12 +32,20 @@ func main() {
 				if key == sdl.K_DOWN {
 					rect.Y += 10
 				}
-				
+			case *sdl.MouseButtonEvent:
+				if event.Type == sdl.MOUSEBUTTONDOWN {
+					// x and y are not real
+					x := event.X
+					y := event.Y
+					col := x / (draw.Width / chess.Cols)
+					row := y / (draw.Height / chess.Rows)
+					chess.SetBoardPos(row, col, 1, board)
+				}
+
 			}
+
 		}
-
-		draw.Rect(rect, draw.Purple, window)
-
+		draw.DrawBoard(board, assets, window)
 		draw.Update(window)
 		draw.Clear(draw.White, window)
 
